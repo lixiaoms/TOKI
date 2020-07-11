@@ -127,7 +127,7 @@ def part_zero(F):
     n=np.shape(F)[0]
     global task
     def task(i):
-        P=F[max(0,100*i-50):min(n,100*i+150),max(0,100*i-50):min(n,100*i+150)]
+        P=F[max(0,window//2*i-window//4):min(n,window//2*i+window-window//4),max(0,window//2*i-window//4):min(n,window//2*i+window-window//4)]
         if np.sum(P)<100:
             return []
         R,t=bestco(P)
@@ -136,17 +136,17 @@ def part_zero(F):
         p=zero(R,t-1)
         pos=[]
         for j in p:
-            if j in range(100*i-max(0,100*i-50),100*i+100-max(0,100*i-50)):
-                pos.append(j+max(0,100*i-50))
+            if j in range(window//2*i-max(0,window//2*i-window//4),window//2*(i+1)-max(0,window//2*i-window//4)):
+                pos.append(j+max(0,window//2*i-window//4))
         return pos
     pool = multiprocessing.Pool(processes=core)
     res_list=[]
-    for i in range(math.ceil(n/100)):
+    for i in range(math.ceil(2*n/window)):
         result = pool.apply_async(task, args=(i,))
         res_list.append(result)
     pool.close()
     pool.join()
-    for i in range(math.ceil(n/100)):
+    for i in range(math.ceil(2*n/window)):
         result=res_list[i]
         pos=np.append(pos,result.get())
     return pos.astype('int32')
