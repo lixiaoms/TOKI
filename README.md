@@ -2,7 +2,7 @@ TOKI
 
 Usage: 
 
-path/to/python3 path/to/TOKI.py <Hi-c matrix file> options
+path/to/python3 path/to/TOKI.py (Hi-C contact matrix file) options
     
     Options:
     
