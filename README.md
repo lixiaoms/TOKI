@@ -1,6 +1,8 @@
 TOKI
 
-Usage: path/to/python3 path/to/TOKI.py <Hi-c matrix file> options
+Usage: 
+
+path/to/python3 path/to/TOKI.py <Hi-c matrix file> options
     
     Options:
     
