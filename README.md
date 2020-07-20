@@ -14,4 +14,4 @@ path/to/python3 path/to/TOKI.py (Hi-C contact matrix file) options
      
      -p <number of cores to use> (default=1)
     
-The ASCII Art displayed after successful coding is a painting of an Anime character, named Onjouji Toki.
+The required Python modules: Scikit-learn, Pandas, Numpy, Multiprocessing
