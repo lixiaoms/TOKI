@@ -22,11 +22,13 @@ path/to/python3 path/to/TOKI.py (Hi-C contact matrix file) options
 The required Python packages and recommended version : Scikit-learn(>=0.21.2), Pandas(>=1.1.0), Numpy(>=1.19.0), Multiprocessing.
 
 Demo:  
+
 There is a GM12878 cell#11 chr19 contact matrix file in the folder '/demo'.  
 It is easy to run deTOKI on the data by the command (add '-p 16' if using 16 cores):
 
 path/to/python3 TOKI.py demo/cell_11 -o cell_11_TAD
 
 Then the output file 'cell_11_TAD' is expected to be same with the file in '/demo'.  
+The number of bins in TAD file represent the predicted TAD boundaries.  
 Reference run time： ~40s (1 core) or ~7s (16 core) in Intel(R) Xeon(R) CPU E5620 @ 2.40GHz,
                      ~17s (1 core) or ~8s (4 core) in Intel(R) Core(TM) i7-9750H @ 2.60GHz.
