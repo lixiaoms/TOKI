@@ -1,6 +1,6 @@
 TOKI
 
-Operating systems: Windows/Linux/Unix, NO software but python3 install required.
+Operating systems: Windows/Linux/Unix, NO software but python3 install required.  
 If running on Windows system, please run "TOKI_windows.py" rather than "TOKI.py".
 
 Usage: 
