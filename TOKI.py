@@ -13,7 +13,7 @@ if len(sys.argv) == 1:
     usage()
     sys.exit()
 try:    
-    opts, args = getopt.getopt(sys.argv[2:], "hb:o:s:p:")
+    opts, args = getopt.getopt(sys.argv[2:], "hb:o:s:p:h:")
 except:
     usage()
     sys.exit()
