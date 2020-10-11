@@ -23,7 +23,7 @@ def corate(A,n,time):
     S=np.zeros([np.shape(A)[0],np.shape(A)[1]])
     for i in range(time):
         K=np.zeros([np.shape(A)[0],np.shape(A)[1]])
-        estimator=decomposition.NMF(n_components=n, init='random',max_iter=1000,random_state=i)
+        estimator=decomposition.NMF(n_components=n, init='random',random_state=i)
         estimator.fit(A)
         B=estimator.transform(A)
         index=B.argmax(axis=1)
