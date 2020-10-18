@@ -5,19 +5,22 @@ import pandas as pd
 import numpy as np
 import math
 
-opts, args = getopt.getopt(sys.argv[2:], "hb:o:s:p:h:")
+opts, args = getopt.getopt(sys.argv[2:], "hb:o:s:p:h:l:")
 resolution=40
 size=[600,1000]
+split=8000
 for op, value in opts:
   if op == "-b":
     resolution = int(value)
   elif op == "-o":
     output_file = value
+  elif op == "-l":
+    split = int(value)
   elif op == "-s":
     size = [int(x) for x in value.split(',')]
 length=400//resolution
 delta=int(math.ceil(100/resolution))
-window=4*(2000//resolution)
+window=split//resolution
 
 def corate(A,n,time):
     S=np.zeros([np.shape(A)[0],np.shape(A)[1]])
@@ -108,13 +111,14 @@ if __name__ == '__main__':
          -b <kbp resolution of matrix> (default=40)
          -o <output dir> (default=./TAD)
          -s <TAD mean kbp size min,max> (default=600,1000)
+         -l <kbp size of split window> (default=8000)
          -p <number of cores to use> (default=1)''')
 
     if len(sys.argv) == 1:
         usage()
         sys.exit()
     try:    
-        opts, args = getopt.getopt(sys.argv[2:], "hb:o:s:p:h:")
+        opts, args = getopt.getopt(sys.argv[2:], "hb:o:s:p:h:l:")
     except:
         usage()
         sys.exit()
@@ -123,6 +127,7 @@ if __name__ == '__main__':
     output_file="./TAD"
     resolution=40
     size=[600,1000]
+    split=8000
     core=1
     for op, value in opts:
       if op == "-b":
@@ -131,6 +136,8 @@ if __name__ == '__main__':
         output_file = value
       elif op == "-s":
         size = [int(x) for x in value.split(',')]
+      elif op == "-l":
+        split = int(value)
       elif op == "-p":
         core = int(value)
       elif op == "-h":
@@ -150,7 +157,7 @@ if __name__ == '__main__':
 
     length=400//resolution
     delta=int(math.ceil(100/resolution))
-    window=4*(2000//resolution)
+    window=split//resolution
     
     def part_zero(F):
         pos=[]
