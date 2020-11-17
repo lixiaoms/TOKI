@@ -10,6 +10,7 @@ def usage():
      -l <kbp size of split window> (default=8000)
      -p <number of cores to use> (default=1)''')
 
+### Input arguments in command line
 if len(sys.argv) == 1:
     usage()
     sys.exit()
@@ -40,6 +41,7 @@ for op, value in opts:
     usage()
     sys.exit()
 
+## Limit each NMF to one core running
 import os
 c='1'
 os.environ["OMP_NUM_THREADS"] = c
@@ -47,6 +49,8 @@ os.environ["OPENBLAS_NUM_THREADS"] = c
 os.environ["MKL_NUM_THREADS"] = c
 os.environ["VECLIB_MAXIMUM_THREADS"] = c
 os.environ["NUMEXPR_NUM_THREADS"] = c
+
+## Import required modules
 from sklearn import decomposition
 import pandas as pd
 import numpy as np
@@ -59,6 +63,7 @@ length=400//resolution
 delta=int(math.ceil(100/resolution))
 window=split//resolution
 
+## Run NMF in several times with random initialisation and output consensus matrix
 def corate(A,n,time):
     S=np.zeros([np.shape(A)[0],np.shape(A)[1]])
     for i in range(time):
@@ -74,12 +79,14 @@ def corate(A,n,time):
         S=S+K
     return S.astype(np.float64)/time
 
+## Calculate clustering rate of each bin
 def IS(R):
     bias=np.zeros([np.shape(R)[0]])
     for i in range(1,np.shape(R)[0]-1):
         bias[i]=np.mean(R[max(0,i-length):(i+1),i:min(i+length+1,np.shape(R)[0])])
     return bias
 
+## Find bins with local minimal clustering rate and global comparative low clustering rate （these bins are detected TAD boundaries)
 def zero(R,t):
     bias=IS(R)
     delta_list=[]
@@ -103,6 +110,7 @@ def zero(R,t):
     enrich.append(len(bias))
     return np.array(enrich)
 
+## Define silhouette coefficient of consensus matrix and detected TAD boundaries
 def silhou(R,pos):
     n=np.shape(R)[0]
     silhou=0
@@ -113,11 +121,12 @@ def silhou(R,pos):
             silhou+=(-a/(pos[i+1]-pos[i])+b/(n+pos[i]-pos[i+1]))/max((a/(pos[i+1]-pos[i]),b/(n+pos[i]-pos[i+1])))
     return silhou/n
 
+## Find the best n_components by comparing silhouette coefficient
 def bestco(F):
     x=-1
     R0=0
     n1=0
-    for n in range(int(np.shape(F)[0]*resolution/size[1]),int(np.shape(F)[0]*resolution/size[0])+1):
+    for n in range(max(int(np.shape(F)[0]*resolution/size[1]),1),int(np.shape(F)[0]*resolution/size[0])+1):
         R1=corate(F,n,10)
         x1=silhou(R1,zero(R1,n-1))
         if x1>=x:
@@ -126,6 +135,7 @@ def bestco(F):
             n1=n
     return R0,n1
 
+## Split huge contact matrix to windows and detected TAD boundaries in each window
 def part_zero(F):
     pos=[]
     n=np.shape(F)[0]
@@ -155,6 +165,7 @@ def part_zero(F):
         pos=np.append(pos,result.get())
     return pos.astype('int32')
 
+## Input the contact matrix and output the detected TAD boundaries
 F=np.loadtxt(input_file)
 #F=np.array(pd.read_csv(input_file,delimiter='\t',index_col=0))
 l=part_zero(F)

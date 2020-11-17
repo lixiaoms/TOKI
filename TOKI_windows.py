@@ -80,7 +80,7 @@ def bestco(F):
     x=-1
     R0=0
     n1=0
-    for n in range(int(np.shape(F)[0]*resolution/size[1]),int(np.shape(F)[0]*resolution/size[0])+1):
+    for n in range(max(int(np.shape(F)[0]*resolution/size[1]),1),int(np.shape(F)[0]*resolution/size[0])+1):
         R1=corate(F,n,10)
         x1=silhou(R1,zero(R1,n-1))
         if x1>=x:
