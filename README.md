@@ -1,11 +1,27 @@
 TOKI
+===
+deTOKI is a newly developed tool for identification of chromatin topologically associating domains (TAD) in single cells.  
+deTOKI decode TAD boundaries that keep chromatin interaction isolated with ultra-sparse Hi-C data (single-cell Hi-C) using NMF (Nonnegative Matrix Factorization).
 
-Operating systems: Windows/Linux/Unix, NO software but python3 install required.  
-If running on Windows system, please run "TOKI_windows.py" rather than "TOKI.py".
+Installation
+---
+Please directly clone this github repository on your computer.  
+Operating systems: Linux/Unix/Windows, with python3 installed.  
+Please install the dependencies: Scikit-learn(>=0.21.2), Pandas(>=1.1.0), Numpy(>=1.19.0). The recommended version is given in parentheses.
 
-Usage: 
+Input
+---
+n × n intra-chromosome contact matrix
 
-path/to/python3 path/to/TOKI.py (Hi-C contact matrix file) options
+Output
+---
+A list of numbers, which represent the genome location of TAD boundaries.  
+For example, if resolution of input matrix is 40kbp, then output [0, 18, 33, 40, 60] means that TAD boundaries are located on 720kbp, 1320kbp, 1600kbp and 2400kbp. 
+
+
+Usage 
+---
+`path/to/python3 path/to/TOKI.py (Hi-C contact matrix file) options`
     
     Options:
     
@@ -18,17 +34,20 @@ path/to/python3 path/to/TOKI.py (Hi-C contact matrix file) options
      -p <number of cores to use> (default=1)
      
      -h <to print usage>
-    
-The required Python packages and recommended version : Scikit-learn(>=0.21.2), Pandas(>=1.1.0), Numpy(>=1.19.0), Multiprocessing.
 
-Demo:  
+If running on Windows system, please run "TOKI_windows.py" rather than "TOKI.py".
 
+Demo
+---
 There is a GM12878 cell#11 chr19 contact matrix file in the folder '/demo'.  
-It is easy to run deTOKI on the data by the command (add '-p 16' if using 16 cores):
+It is easy to run deTOKI on this data by the following command (add '-p 16' if using 16 cores):
 
-path/to/python3 TOKI.py demo/cell_11 -o cell_11_TAD
+`path/to/python3 TOKI.py demo/cell_11 -o cell_11_TAD`
 
 Then the output file 'cell_11_TAD' is expected to be same with the file in '/demo'.  
-The number of bins in TAD file represent the predicted TAD boundaries.  
 Reference run time： ~40s (1 core) or ~7s (16 core) in Intel(R) Xeon(R) CPU E5620 @ 2.40GHz,
-                     ~17s (1 core) or ~8s (4 core) in Intel(R) Core(TM) i7-9750H @ 2.60GHz.
+                     ~17s (1 core) or ~8s (4 core) in Intel(R) Core(TM) i7-9750H @ 2.60GHz.  
+                     
+Citation
+---
+Xiao Li, Zhihua Zhang. "Identifying TADs with single cell Hi-C." The 6th International Symposium on 3D Genomics, Beijing, Oct., 2019. 
