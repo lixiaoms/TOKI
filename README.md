@@ -21,9 +21,13 @@ For example, if resolution of input matrix is 40kbp, then output [0, 18, 33, 40,
 
 Usage 
 ---
-`path/to/python3 path/to/TOKI.py (Hi-C contact matrix file) options`
+`path/to/python3 path/to/TOKI.py [FILE] [OPTIONS]`
+
+    FILE:
     
-    Options:
+     The file location of Hi-C contact matrix.
+     
+    OPTIONS:
     
      -b <kbp resolution of matrix> (default=40)
      
