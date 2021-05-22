@@ -1,6 +1,7 @@
 TOKI
 ===
-deTOKI is a newly developed tool for identification of chromatin topologically associating domains (TAD) in single cells.  
+deTOKI is a newly developed tool for identification of chromatin topologically associating domains (TAD) in single cells.
+Although we use term "TAD" here, we refer to the TAD-like domains in single cells. 
 deTOKI decode TAD boundaries that keep chromatin interaction isolated with ultra-sparse Hi-C data (single-cell Hi-C) using NMF (Nonnegative Matrix Factorization).
 
 Installation
@@ -50,7 +51,12 @@ It is easy to run deTOKI on this data by the following command (add '-p 16' if u
 
 Then the output file 'cell_11_TAD' is expected to be same with the file in '/demo'.  
 Reference run time： ~40s (1 core) or ~7s (16 core) in Intel(R) Xeon(R) CPU E5620 @ 2.40GHz,
-                     ~17s (1 core) or ~8s (4 core) in Intel(R) Core(TM) i7-9750H @ 2.60GHz.  
+                     ~17s (1 core) or ~8s (4 core) in Intel(R) Core(TM) i7-9750H @ 2.60GHz.
+
+3D simulated single cell Hi-C
+---
+We also upload the code for generating simulated single-cell Hi-C data. Please refer to fold /simulated_Hi-C.
+Basing on the model.xyz data resulted from IMP software, "3D simulated scHi-C.py" can generate simulated scHi-C and ensemble Hi-C data.
                      
 Citation
 ---
