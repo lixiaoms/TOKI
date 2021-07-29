@@ -55,9 +55,9 @@ Reference run time： ~40s (1 core) or ~7s (16 core) in Intel(R) Xeon(R) CPU E56
 
 3D simulated single cell Hi-C
 ---
-We also upload the code for generating simulated single-cell Hi-C data. Please refer to fold /simulated_Hi-C.
+We also uploaded the code for generating simulated single-cell Hi-C data. Please refer to fold /simulated_Hi-C.
 Basing on the model.xyz data resulted from IMP software, "3D simulated scHi-C.py" can generate simulated scHi-C and ensemble Hi-C data.
                      
 Citation
 ---
-Xiao Li, Zhihua Zhang. "Identifying TADs with single cell Hi-C." The 6th International Symposium on 3D Genomics, Beijing, Oct., 2019. 
+Li, X., Zeng, G., Li, A. et al. DeTOKI identifies and characterizes the dynamics of chromatin TAD-like domains in a single cell. Genome Biol 22, 217 (2021). https://doi.org/10.1186/s13059-021-02435-7
